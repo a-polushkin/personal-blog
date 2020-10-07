@@ -1,9 +1,8 @@
 import React from "react"
-import { Link } from "gatsby"
+import { StaticQuery, graphql, Link } from "gatsby"
 
 import Layout from "../components/layout"
 import SEO from "../components/seo"
-import { StaticQuery, graphql } from "../../.cache/gatsby-browser-entry"
 import Article from "../components/article"
 
 const SecondPage = () => (
@@ -12,10 +11,7 @@ const SecondPage = () => (
     <h1>Hi from the second page</h1>
     <StaticQuery
       query={graphql`
-        {
-          contentfulUser(avatar: { file: { url: {} } }) {
-            fullName
-          }
+        query MyQuery {
           allContentfulArticle {
             edges {
               node {
@@ -29,6 +25,14 @@ const SecondPage = () => (
                   }
                 }
                 publishedAt
+                author {
+                  avatar {
+                    file {
+                      url
+                    }
+                  }
+                  fullName
+                }
               }
             }
           }
